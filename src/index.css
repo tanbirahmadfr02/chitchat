@@ -1,0 +1,28 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* body{
+  overflow: hidden;
+} */
+
+.css-480o17-MuiGrid-root {
+  margin-top: 0 !important;
+  margin-left: 0 !important;
+}
+
+:root {
+  --darkBlue: #11175d;
+  --blue: #5f35f5;
+  --poppins: "Poppins", sans-serif;
+  --nunito: "Nunito", sans-serif;
+}
+
+.Toastify__close-button {
+  width: 30px !important;
+}
+
+.link {
+  text-decoration: none !important;
+}
