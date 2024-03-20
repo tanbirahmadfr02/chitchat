@@ -110,7 +110,7 @@ const Registration = () => {
               </div>
               <div className="regMain">
                 <div>
-                  <div className="from-box">
+                  <div className="formBox">
                     <div className="input-box">
                       <p className="label">Email Adress</p>
                       <Input

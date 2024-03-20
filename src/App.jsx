@@ -20,17 +20,18 @@ function App() {
       <>
         <Route path="/" element={<Registration />}></Route>
         <Route path="/login" element={<Login />}></Route>
-        <Route path="/home" element={<Home />}></Route>
         <Route path="/forgotpassword" element={<ForgotPassword />}></Route>
-        <Route path="/message" element={<Message />}></Route>
-        <Route path="/setting" element={<Setting/>}></Route>
+        <Route path="/home" element={<Home />}>
+          <Route path="message" element={<Message />}></Route>
+          <Route path="setting" element={<Setting />}></Route>
+        </Route>
       </>
     )
   );
   return (
     <>
-      <RouterProvider router={router} />
       <ToastContainer />
+      <RouterProvider router={router} />
     </>
   );
 }

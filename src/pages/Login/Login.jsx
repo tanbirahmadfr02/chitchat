@@ -136,7 +136,7 @@ const Login = () => {
                         <FaFacebook />
                       </div>
                     </div>
-                    <div className="from-box loginFormBox">
+                    <div className="formBox loginFormBox">
                       <div className="input-box">
                         <p className="label">Email Adress</p>
                         <Input
