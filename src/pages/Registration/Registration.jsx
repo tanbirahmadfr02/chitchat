@@ -60,12 +60,17 @@ const Registration = () => {
         .then((userCredential) => {
           setLoading(false);
           sendEmailVerification(auth.currentUser).then(() => {
-            toast.success("Registration successful, please check your email to verify your account", {
-              position: "top-center",
-              autoClose: 3000,
-              theme: "dark",
-            });
-            navigate("/login");
+            toast.success(
+              "Registration successful, please check your email to verify your account",
+              {
+                position: "top-center",
+                autoClose: 3000,
+                theme: "dark",
+              }
+            );
+            setTimeout(() => {
+              navigate("/login");
+            }, 3000);
           });
         })
         .catch((error) => {
@@ -83,108 +88,117 @@ const Registration = () => {
     <>
       <section>
         <Grid container spacing={4}>
+          <Grid xs={3}></Grid>
           <Grid xs={6}>
-            <div className="regBox">
-              <div>
-                <Heading
-                  className="heading"
-                  tag={true}
-                  as="h1"
-                  text="Get started with easily register"
-                />
-              </div>
-              <Paragraph
-                className={"paragraph"}
-                text={"Free register and you can enjoy it"}
-              />
-              <div className="from-box">
-                <div className="input-box">
-                  <p className="label">Email Adress</p>
-                  <Input
-                    className={"input"}
-                    type={"Email"}
-                    name={"email"}
-                    onChange={handleChange}
-                  />
-                  {regError.email && (
-                    <Alert severity="error" className="alert">
-                      {regError.email}
-                    </Alert>
-                  )}
-                </div>
-                <div className="input-box">
-                  <p className="label">Full Name</p>
-                  <Input
-                    className={"input"}
-                    type={"text"}
-                    name={"name"}
-                    onChange={handleChange}
-                  />
-                  {regError.name && (
-                    <Alert severity="error" className="alert">
-                      {regError.name}
-                    </Alert>
-                  )}
-                </div>
-                <div className="input-box">
-                  <p className="label">Password</p>
-                  <div className="passBox">
-                    <Input
-                      className={"input"}
-                      type={showPass ? "text" : "password"}
-                      name={"password"}
-                      onChange={handleChange}
+          <div className="mainBox">
+          <div className="regBox">
+              <div className="img">
+                <div className="overlay">
+                  <div>
+                    <Heading
+                      className="heading"
+                      tag={true}
+                      as="h1"
+                      text="Get started with easily register"
                     />
-                    {showPass ? (
-                      <div
-                        className="showPass"
-                        onClick={() => setShowPass(!showPass)}
-                      >
-                        <IoMdEyeOff />
+                  </div>
+                  <Paragraph
+                    className={"paragraph"}
+                    text={"Free register and you can enjoy it"}
+                  />
+                </div>
+              </div>
+              <div className="regMain">
+                <div>
+                  <div className="from-box">
+                    <div className="input-box">
+                      <p className="label">Email Adress</p>
+                      <Input
+                        className={"input"}
+                        type={"Email"}
+                        name={"email"}
+                        onChange={handleChange}
+                      />
+                      {regError.email && (
+                        <Alert severity="error" className="alert">
+                          {regError.email}
+                        </Alert>
+                      )}
+                    </div>
+                    <div className="input-box">
+                      <p className="label">Full Name</p>
+                      <Input
+                        className={"input"}
+                        type={"text"}
+                        name={"name"}
+                        onChange={handleChange}
+                      />
+                      {regError.name && (
+                        <Alert severity="error" className="alert">
+                          {regError.name}
+                        </Alert>
+                      )}
+                    </div>
+                    <div className="input-box">
+                      <p className="label">Password</p>
+                      <div className="passBox">
+                        <Input
+                          className={"input"}
+                          type={showPass ? "text" : "password"}
+                          name={"password"}
+                          onChange={handleChange}
+                        />
+                        {showPass ? (
+                          <div
+                            className="showPass"
+                            onClick={() => setShowPass(!showPass)}
+                          >
+                            <IoMdEyeOff />
+                          </div>
+                        ) : (
+                          <div
+                            className="showPass"
+                            onClick={() => setShowPass(!showPass)}
+                          >
+                            <IoMdEye />
+                          </div>
+                        )}
+                      </div>
+                      {regError.password && (
+                        <Alert severity="error" className="alert">
+                          {regError.password}
+                        </Alert>
+                      )}
+                    </div>
+                    {loading ? (
+                      <div className="loader">
+                        <DNA
+                          visible={true}
+                          height="60"
+                          width="60"
+                          ariaLabel="dna-loading"
+                          wrapperStyle={{}}
+                          wrapperClass="dna-wrapper"
+                        />
                       </div>
                     ) : (
-                      <div
-                        className="showPass"
-                        onClick={() => setShowPass(!showPass)}
-                      >
-                        <IoMdEye />
-                      </div>
+                      <button className="submitBtn" onClick={handleSubmit}>
+                        Sign up
+                      </button>
                     )}
                   </div>
-                  {regError.password && (
-                    <Alert severity="error" className="alert">
-                      {regError.password}
-                    </Alert>
-                  )}
+                  <p className="signIn">
+                    Already have an account ?{" "}
+                    <Link className="link" to={"/login"}>
+                      <span>Sign In</span>
+                    </Link>
+                  </p>
                 </div>
-                {loading ? (
-                  <div style={{ textAlign: "center", width: "368px" }}>
-                    <DNA
-                      visible={true}
-                      height="60"
-                      width="60"
-                      ariaLabel="dna-loading"
-                      wrapperStyle={{}}
-                      wrapperClass="dna-wrapper"
-                    />
-                  </div>
-                ) : (
-                  <button onClick={handleSubmit}>Sign up</button>
-                )}
               </div>
-              <p className="signIn">
-                Already have an account ?{" "}
-                <Link className="link">
-                  <span>Sign Up</span>
-                </Link>
-              </p>
             </div>
+          </div>
           </Grid>
-          <Grid xs={6}>
-            <div>
-              <Image className={"regImg"} src={regImg} />
-            </div>
-          </Grid>
+          <Grid xs={3}></Grid>
         </Grid>
       </section>
     </>
