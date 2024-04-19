@@ -10,6 +10,26 @@
   color: var(--darkBlue);
 }
 
+.login {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(
+    115deg,
+    rgba(190, 116, 46, 0.657),
+    rgba(0, 100, 128, 0.657)
+  );
+}
+
+.formMain {
+  padding: 0 50px 30px 50px;
+  background-color: white;
+  filter: drop-shadow(1px 4px 5px green);
+  -webkit-filter: drop-shadow(10px 10px 10px green);
+}
+
 .loginWith {
   display: flex;
   justify-content: center;
@@ -38,14 +58,11 @@
 }
 
 .loginBox .img {
-  width: 100%;
+  margin: 0 auto;
   background: url(../../assets/loginImg.jpg) no-repeat center / cover;
 }
 
 .loginBox .overlay {
   padding: 30px 0;
   background-color: rgba(0, 0, 0, 0.593);
-}
-.loginFormBox {
-  margin-top: 25px !important;
 }

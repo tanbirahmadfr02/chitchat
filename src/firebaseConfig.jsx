@@ -11,10 +11,10 @@ const firebaseConfig = {
   projectId: "chitchat-2058b",
   storageBucket: "chitchat-2058b.appspot.com",
   messagingSenderId: "412384452650",
-  appId: "1:412384452650:web:91a73ede9ea0ef0d3de353"
+  appId: "1:412384452650:web:91a73ede9ea0ef0d3de353",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-export default firebaseConfig
+export default firebaseConfig;

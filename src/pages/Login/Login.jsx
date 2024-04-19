@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import loginImg from "../../assets/loginImg.jpg";
 import "../Login/Login.css";
@@ -19,11 +19,16 @@ import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa";
-const provider = new GoogleAuthProvider();
+import { useDispatch, useSelector } from "react-redux";
+import { activeUser } from "../../slices/user/userSlice";
 
 const Login = () => {
+
+  const provider = new GoogleAuthProvider();
   const auth = getAuth();
   let navigate = useNavigate();
+  let dispatch = useDispatch()
+  let data = useSelector((state)=> state?.user?.value)
   let [showPass, setShowPass] = useState(false);
   let [loading, setLoading] = useState(false);
   let [regData, setRegData] = useState({
@@ -34,6 +39,12 @@ const Login = () => {
     email: "",
     password: "",
   });
+
+  useEffect(()=>{
+    if(data?.email){
+      navigate("/home")
+    }
+  })
 
   let handleChange = (e) => {
     setRegData({ ...regData, [e.target.name]: e.target.value });
@@ -63,8 +74,8 @@ const Login = () => {
               autoClose: 3000,
               theme: "dark",
             });
+            setLoading(false)
           } else {
-            console.log(userCredential);
             setLoading(false);
             toast.success("Login successful", {
               position: "top-center",
@@ -72,6 +83,9 @@ const Login = () => {
               theme: "dark",
             });
             setTimeout(() => {
+              localStorage.setItem("user", JSON.stringify(userCredential.user))
+              dispatch(activeUser(userCredential.user))
+              console.log(userCredential.user);
               navigate("/home");
             }, 3000);
           }
@@ -100,6 +114,7 @@ const Login = () => {
           autoClose: 3000,
           theme: "dark",
         });
+        navigate("/home")
       })
       .catch((error) => {
         console.log(error);
@@ -108,10 +123,10 @@ const Login = () => {
 
   return (
     <>
-      <section>
+      <section className="login">
         <Grid container spacing={4}>
-          <Grid xs={3}></Grid>
-          <Grid xs={6}>
+          <Grid xs={4}></Grid>
+          <Grid xs={4}>
             <div className="mainBox">
               <div className="loginBox">
                 <div className="img">
@@ -213,7 +228,7 @@ const Login = () => {
               </div>
             </div>
           </Grid>
-          <Grid xs={3}></Grid>
+          <Grid xs={4}></Grid>
         </Grid>
       </section>
     </>
